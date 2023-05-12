@@ -62,7 +62,12 @@ public class Register extends AppCompatActivity {
         isTeacher = findViewById(R.id.TeacherBox);
         isStudent = findViewById(R.id.studentBox);
 
-
+        gotoLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),Login.class));
+            }
+        });
       isStudent.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
           @Override
           public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -134,19 +139,11 @@ public class Register extends AppCompatActivity {
                             Toast.makeText(Register.this, "Failed To Create Account", Toast.LENGTH_SHORT).show();
                         }
                     });
-
-                    gotoLogin.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            startActivity(new Intent(getApplicationContext(),Login.class));
-                        }
-                    });
-
-
                 }
             }
         });
     }
+
 
     public boolean checkField(EditText textfield){
         if(textfield.getText().toString().isEmpty()){

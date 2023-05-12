@@ -60,11 +60,13 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             Toast.makeText(Login.this, "Login Succesfully", Toast.LENGTH_SHORT).show();
-                            checkUserAccessLevel(authResult.getUser().getUid());
+
+                           checkUserAccessLevel(authResult.getUser().getUid());
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(Login.this, "Login Failed", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -80,10 +82,11 @@ public class Login extends AppCompatActivity {
         });
 
 
+
     }
 
     private void checkUserAccessLevel(String uid) {
-        DocumentReference df = fStore.collection("Users").document(uid);
+        DocumentReference df = fStore.collection("users").document(uid);
         df.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -92,11 +95,13 @@ public class Login extends AppCompatActivity {
                 if(documentSnapshot.getString( "isAdmin")!= null){
                     startActivity(new Intent(getApplicationContext(),adminActivity.class));
                     finish();
-                } else if (documentSnapshot.getString("isTeacher")!= null){
+                }
+                if (documentSnapshot.getString("isTeacher")!= null){
                     startActivity(new Intent(getApplicationContext(),teacher.class));
+                    Toast.makeText(Login.this, "Teacher Loged In", Toast.LENGTH_SHORT).show();
                     finish();
                 }
-                else if(documentSnapshot.getString("isStudent")!= null){
+                if(documentSnapshot.getString("isStudent")!= null){
                     startActivity(new Intent(getApplicationContext(),student.class));
                     finish();
                 }

@@ -13,4 +13,7 @@
     <string name="go_to_login">Go To LogIn</string>
     <string name="teacher2">Teacher</string>
     <string name="student2">Student</string>
+    <string name="cal_image">cal Image</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="login1">LOGIN</string>
 </resources>
